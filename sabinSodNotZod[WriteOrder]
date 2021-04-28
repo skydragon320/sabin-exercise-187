@@ -1,0 +1,50 @@
+//skylar sabin
+//cpt 187
+//this class writes down what the user "buys" on to a file
+//4/28/21
+package edu.cpt.sabin.exercise6;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class WriteOrder 
+{
+	//variables
+	private boolean fileFoundFlag=false;
+	private String masterFileName=" ";
+	private int recordCount =0;
+		
+	WriteOrder(String borrowedFileName)
+	{
+		masterFileName=borrowedFileName;
+	}
+	public void setWriteOrder(int borrowedItemID,String borrowedItemName,double borrowedItemPrice,int borrowedQuantity,double borrowedOrderCost)
+	{
+		try
+		{
+			PrintWriter filePW= new PrintWriter(new FileWriter(masterFileName,fileFoundFlag));
+			filePW.printf("%n%-5d\t%-10s\t%-5.2f\t%-5d\t%-5.2f", borrowedItemID,borrowedItemName,borrowedItemPrice,borrowedQuantity,borrowedOrderCost);
+			fileFoundFlag=true;
+			filePW.close();
+			recordCount++;
+		}
+		catch(IOException ex)
+		{
+			fileFoundFlag=false;
+		}
+		
+	}
+	public boolean getFileFoundFlag()
+	{
+		return fileFoundFlag;
+	}
+	public String getFileName() 
+	{
+		return masterFileName;
+	}
+	public int getRecordCounts()
+	{
+		return recordCount;
+	}
+}
